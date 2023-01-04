@@ -1,0 +1,51 @@
+I"	<h1 id="앞서-파일을-다운받으셔야합니다여기에-들어가서-클론해주세요">앞서 파일을 다운받으셔야합니다.<a href="https://github.com/learning-mysql-2nd/">여기</a>에 들어가서 클론해주세요</h1>
+
+<p>다운을 완료하시고 압축을 푸셨다면 폴더안에 챕터별폴더가 여러개있습니다.</p>
+<p style="margin-bottom: 0px;">
+
+그중 ch2폴더를 여시고 이것을--&gt;<img src="/assets/images/ch2.png" alt="" width="60" height="60" />
+더블 클릭하면 아래 화면이 뜨게 됩니다.
+</p>
+<div><img src="/assets/images/first.png" alt="" width="800" height="500" align="center" /></div>
+<p style="margin-bottom: 0px;">
+상단 메뉴바에 database를 선택하고
+</p>
+<div><img src="/assets/images/second.png" alt="" width="800" height="500" align="center" /></div>
+<p style="margin-bottom: 0px;">
+'Forward Engineer...'를 선택해주세요
+</p>
+<div><img src="/assets/images/third.png" alt="" width="800" height="500" align="center" /></div>
+<p style="margin-bottom: 0px;">
+stored connection에서 포트를 선택해주시고
+</p>
+<div><img src="/assets/images/fourth.png" alt="" width="800" height="500" align="center" /></div>
+<p style="margin-bottom: 0px;">
+options에서는 include model matched script만 선택하시고 continue를 눌러줍니다.
+</p>
+<div><img src="/assets/images/fifth.png" alt="" width="800" height="500" align="center" /></div>
+<p style="margin-bottom: 0px;">
+select objects에서는 exports mysql table objects만 선택하시고 continue를 눌러줍니다.
+</p>
+<div><img src="/assets/images/sixth.png" alt="" width="800" height="500" align="center" /></div>
+<p style="margin-bottom: 0px;">
+review sql script에서는 파일에 저장하거나 클립보드에 복사할것이 아니라면 continue를 선택해주세요.
+</p>
+<div><img src="/assets/images/seventh.png" alt="" width="800" height="500" align="center" /></div>
+<p style="margin-bottom: 0px;">
+commit progress에서는 진행과정을 보여주고 과정이 다 끝나면 close버튼을 눌러주세요
+</p>
+<div><img src="/assets/images/eighth.png" alt="" width="800" height="500" align="center" /></div>
+
+<p style="margin-bottom: 0px;">
+여기서 맨위 메뉴바에서 database를 클릭하고 fowwarding작업을 해주시면 ddl로 변환되어 dataabse에 반영이 됩니다.
+해당 mysql서버에 들어가서 
+</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">show</span> <span class="n">databases</span><span class="p">;</span>
+</code></pre></div></div>
+<p style="margin-bottom: 0px;">
+쿼리를 실행하면 아래처럼 bank_model이 반영된것을 볼 수있습니다.
+<div><img src="/assets/images/ninth.png" alt="" width="300" height="400" align="center" /></div>
+<p />
+
+</p>
+:ET
