@@ -1,0 +1,487 @@
+I"��<h2 id="배열구조체포인터">배열,구조체,포인터</h2>
+
+<h3 id="31-배열">3.1 배열</h3>
+
+<h4 id="배열의-개념">배열의 개념</h4>
+
+<ul>
+  <li>배열은 동일한 타입의 데이터를 한 번에 여러 개 만들 때 사용된다.</li>
+  <li>배열을 사용하면 ‘연속적인 메모리 공간’이  할당되고  인덱스 번호를 사용하여 쉽게 접근이 가능하기 때문에 반복 루프를 이용하여 여러가지 작업을 손쉽게 할 수 있다.</li>
+</ul>
+
+<h4 id="배열-adt">배열 ADT</h4>
+
+<ul>
+  <li>배열은 &lt;인덱스,값&gt;의 쌍으로 이루어진 집합으로 정의할 수 있다.</li>
+  <li>ADT <Array>
+</Array>    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  객체:&lt;인덱스,값&gt;쌍의 집합
+  연산:
+      - create(size) ::==size개의 요소를 저장할 수 있는 배열 생성
+      - get(A,i) ::==배열 A의 i번째 요소 반환
+      - set(A,i,v) ::==배열 A의 i번째 위치에 값 v저장.
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<blockquote>
+  <p>get함수는 배열과 인덱스를 받는다.만약 그 인덱스가 유효하다면 인덱스 위치의 값을 반환한다.만약 인덱스가  유효하지 않다면 오류를 반환한다.
+set함수는 배열,인덱스,값을 받아서 새로운 인덱스  위치에  저장한다.</p>
+</blockquote>
+
+<h4 id="c언어에서의-1차원--배열">C언어에서의 1차원  배열</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">list</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>    <span class="c1">//create 연산에 해당된다.</span>
+
+<span class="n">list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">;</span>    <span class="c1">//set연산에 해당된다.</span>
+<span class="n">value</span><span class="o">=</span><span class="n">list</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>  <span class="c1">//get연산에 해당된다.</span>
+</code></pre></div></div>
+
+<h4 id="2차원-배열">2차원 배열</h4>
+
+<ul>
+  <li>2차원 배열은 요소들이 2차원 형태로 나열된 배열이다.</li>
+  <li>2차원 배열에서 가로줄을 행(row),세로줄을 열(column)이라고 한다.</li>
+</ul>
+
+<h3 id="quizp73">quiz(p.73)</h3>
+
+<ol>
+  <li>
+    <p>c언어에서는 배열  ADT의연산들이 어떻게  구현되는가?</p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kt">int</span> <span class="n">list</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>    <span class="c1">//create 연산에 해당된다.</span>
+
+ <span class="n">list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">100</span><span class="p">;</span>    <span class="c1">//set연산에 해당된다.</span>
+ <span class="n">value</span><span class="o">=</span><span class="n">list</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>  <span class="c1">//get연산에 해당된다.</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>int a[6];과 같이 정의된 1차원 배열에서 시작주소를 base라고 하면  a[5]요소의 주소는?
+ base-sizeof(int)</p>
+  </li>
+</ol>
+
+<h3 id="32-구조체">3.2 구조체</h3>
+
+<h4 id="구조체의-개념">구조체의 개념</h4>
+
+<ul>
+  <li>배열이 타입이 같은 데이터의 모임이라면 구조체(structure)는 타입이 다른 데이터를 붂는 방법이다.</li>
+  <li>c언어에서는 struct키워드를 이용하여 표기한다.</li>
+  <li>
+    <p>구조체의 형식은 다음과 같이 정의한다.</p>
+
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struct 구조체 이름{
+        항목1;
+        항목2;
+        ...     };
+</code></pre></div>    </div>
+  </li>
+  <li>구조체의 형식이 위와같이 정의되었다면 구조체 변수는 다음과 같이 생성한다.
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  struct 구조체이름 구조체 변수;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>간단한 예로 학생을 나타내는 구조체를 만들어 보면 다음과 같다.</p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">studentTag</span><span class="p">{</span>  
+    <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>   <span class="c1">//문자 배열로 된 이름</span>
+    <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>    <span class="c1">//나이를 나타내는 정수값</span>
+    <span class="kt">double</span> <span class="n">gpa</span><span class="p">;</span> <span class="c1">//평균 평점을 나타내는 실수값</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>struct 키워드 다음에 오는 studentTag는 구조체와 구조체를 구별할 수 있게 해주는 식별자로서  보통 구조체 태그(tag)라고한다.</li>
+  <li>위의 문장은 구조체 틀만 정의한 것이고 실제로 구조체가 만들어진것은 아니다.</li>
+  <li>구조체를 만들려면 다음과 같이 해야한다.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">studentTag</span> <span class="n">s</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>구조체 안에 들어있는 멤버를 사용하려면 구조체 변수뒤에 <strong>.</strong>(멤버 연산자,membership oprator)을 추가한 후 항목 이름을 적으면된다.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">strcpy</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="s">"kim"</span><span class="p">);</span>
+<span class="n">s</span><span class="p">.</span><span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">;</span>
+<span class="n">s</span><span class="p">.</span><span class="n">gpa</span><span class="o">=</span><span class="mi">4</span><span class="p">.</span><span class="mi">3</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>C언어 에서는 typedef을 사용하여 구조체를 새로운 타입으로 선언하는 것이 가능하다.</li>
+  <li>아래의 예에서 student은 새로운 데이터 타입의 이름이 된다.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="n">studentTag</span><span class="p">{</span>  
+  <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>   <span class="c1">//문자 배열로 된 이름</span>
+  <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>    <span class="c1">//나이를 나타내는 정수값</span>
+  <span class="kt">double</span> <span class="n">gpa</span><span class="p">;</span> <span class="c1">//평균 평점을 나타내는 실수값</span>
+<span class="p">}</span> <span class="n">student</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>이 경우에는 새로운 타입인 student만을 사용하여서 변수를 선언하는 것이 가능해진다.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">student</span> <span class="n">s</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>구조체는 중괄호를 사용하여 선언 시에 초기화하는것이 가능하다.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">student</span> <span class="n">s</span><span class="o">=</span><span class="p">{</span><span class="s">"kim"</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">4</span><span class="p">.</span><span class="mi">3</span><span class="p">};</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="quizp75">quiz(p.75)</h3>
+
+<ol>
+  <li>
+    <p>2차원 좌표공간에서 하나의 점을 나타내는 구조체 Point를 정의하여 보라.typedef도 사용하여서 구조체 Point를 하나의 타입으로 정의한다.</p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">struct</span> <span class="n">PointTag</span><span class="p">{</span>  
+     <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+     <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+ <span class="p">}</span>
+
+ <span class="k">typedef</span> <span class="n">PointTag</span><span class="p">{</span>  
+     <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+     <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+ <span class="p">}</span> <span class="n">Point</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>01에서 정의한 구조체 변수인 p1과 p2를 정의하여 보라.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">Point</span> <span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>p1과  p2를 각각(1,2)와 (9,8)로  초기화 하라.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">Point</span> <span class="n">p1</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">};</span>
+ <span class="n">Point</span> <span class="n">p2</span><span class="o">=</span><span class="p">{</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">};</span>
+</code></pre></div>    </div>
+  </li>
+  <li>점을 나타내는 두개의 구조체 변수를 받아서 점 사이의 거리를 계산하는 함수 get_distance(Point p1,Point p2)를 작성하여 보자.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">get_distance</span><span class="p">(</span><span class="n">Point</span> <span class="n">p1</span><span class="p">,</span><span class="n">Point</span> <span class="n">p2</span><span class="p">)</span>
+     <span class="k">return</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="n">p1</span><span class="p">.</span><span class="n">x</span><span class="o">-</span><span class="n">p2</span><span class="p">.</span><span class="n">x</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">pow</span><span class="p">(</span><span class="n">p1</span><span class="p">.</span><span class="n">y</span><span class="o">-</span><span class="n">p2</span><span class="p">.</span><span class="n">y</span><span class="p">,</span><span class="mi">2</span><span class="p">));</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="33-배열의-응용다항식">3.3 배열의 응용:다항식</h3>
+
+<p>다항식의 일반적인 형태는 다음과 같다.<br />
+$
+p(x)=a_nx^n+a_{n-1}x^{n-1}+…+a_1x+a_0<br />
+$<br />
+위의 다항식에서 a:계수,x:변수,n:차수라 부른다.</p>
+
+<p>다항식을  나타내는 두가지의 자료구조</p>
+
+<ul>
+  <li>첫번째 방법
+    <ul>
+      <li>
+        <p>첫번째 방법은 모든 차수의 계수값을 배열에 저장하는 것이다.</p>
+
+        <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define MAX_DEGREE 101      //다항식의 최대 차수(100)+1
+</span><span class="k">typedef</span> <span class="k">struct</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">degree</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">coef</span><span class="p">[</span><span class="n">MAX_DEGREE</span><span class="p">];</span>
+<span class="p">}</span> <span class="n">polynomial</span><span class="p">;</span>
+
+<span class="n">polynomail</span> <span class="n">a</span><span class="o">=</span><span class="p">{</span><span class="mi">5</span><span class="p">,{</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">}};</span>
+</code></pre></div>        </div>
+      </li>
+      <li>이 방법의 문제점은 대부분의 항의 계수가 0인 희소 다항식의 경우에는 공간의 낭비가 심하다는 것이다.</li>
+      <li>그러나 이방법의 최대 장점은 다항식의 덧셈이나 뺄셈시에 같은 차수의 계수를 쉽게 찾을 수 있으므로 알고리즘이 간단해진다.</li>
+    </ul>
+  </li>
+  <li>두번째 방법
+    <ul>
+      <li>공간을 절약하기 위해 다항식에서 0이 아닌 항만을 하나의 전역 배열에 저장하는 방법도 생각할 수 있다.</li>
+      <li>
+        <p>다항수의 0이 아닌 항들은 (계수,차수)의 형식으로 구조체 배열에 저장된다.</p>
+
+        <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define MAX_TERMS 101
+</span><span class="k">struct</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">coef</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">expon</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">terms</span><span class="p">[</span><span class="n">MAX_TERMS</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">avail</span><span class="p">;</span>
+</code></pre></div>        </div>
+      </li>
+      <li>avail변수는 현재 비어있는 요소의 인덱스를 가리친다.</li>
+      <li>이러한 표현방법은 terms안에 항의 총 개수가 MAX_TERMS을 넘지만 않으면 많은 다항식을 저장할 수 있다.</li>
+      <li>그러나 이방식도 단점도 존재하는데,하나의 다항식이 시작되고 끝나는 위치를 가리키는 인덱스 변수들을 관리하여야한다.</li>
+      <li>또한 차수도 저장해야하기 때문에,다항식에 따라서는 계수만을 저장하는 첫번쨰 방식보다 공간을 더 많이 필요로 할 수도 있다.</li>
+      <li>또한 다항식의 덧셈을 비롯한 연산들의 구현이 첫번쨰 방법보다 좀더 어려워진다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="34-희소-행렬">3.4 희소 행렬</h2>
+
+<h2 id="35-포인터">3.5 포인터</h2>
+
+<h4 id="포인터의-개념">포인터의 개념</h4>
+
+<ul>
+  <li>포인터는 다른 변수의 주소를 가지고있는 변수이다.</li>
+  <li>모든 변수에는 메모리 공간에 저장되고 메모리의 각 바이트에는 주소가 매겨져 있다.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">100</span><span class="p">;</span>
+<span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+<span class="n">p</span><span class="o">=&amp;</span><span class="n">a</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>먼저 int형의 변수 a가 정의되고 p는 int형을 가리키는 포인터로 정의된다.</li>
+  <li>p가 a를 가리키게 하려면 a의 주소를 p에 대입한다.</li>
+  <li>변수의 주소는 &amp;연산자를 변수에 적용시켜서 추출할수 있다.</li>
+</ul>
+
+<h4 id="포인터와-관련된-연산자">포인터와 관련된 연산자</h4>
+
+<ul>
+  <li>&amp;연산자:주소연산자</li>
+  <li>*연산자:간접참조 연산자(역참조 연산자)</li>
+</ul>
+
+<ol>
+  <li>&amp;연산자는 변수의 주소를 추출하는 연산자이다.앞에서 선언한 포인터p가 특정한 변수를 가리키게 하려면 변수의 주소를 &amp;연산자로 추출하여서 p에 대입한다.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">a</span><span class="p">;</span>  <span class="c1">//정수형 변수</span>
+<span class="n">p</span><span class="o">=&amp;</span><span class="n">a</span><span class="p">;</span>   <span class="c1">//변수의 주소를 포인터에 저장</span>
+</code></pre></div>    </div>
+  </li>
+  <li>*연산자는 포인터가 가리키는 장소에 값을 저장하는 연산자이다.예를 들어서 p가 가리키는 장소에 200을 저장하려면 다음과 같은 문장을 사용한다.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="mi">200</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="다양한-포인터">다양한 포인터</h4>
+
+<ul>
+  <li>포인터는 다음과같이 여러가지 자료형에 대하여 선언될 수 있다.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+<span class="kt">float</span> <span class="o">*</span><span class="n">pf</span><span class="p">;</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">pc</span><span class="p">;</span>
+</code></pre></div>    </div>
+    <h4 id="널-포인터">널 포인터</h4>
+  </li>
+  <li>널포인터는 어떤 객체도 가리키지 않는 포인터이다.</li>
+  <li>일반적으로 c언어에서 널 포인터는 null이라는 매크로로 표시한다.</li>
+  <li>포인터를 사용하기 전에는 반드시 널 포인터인지를 검사하여야 한다.</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="n">null</span><span class="p">){</span>
+        <span class="n">fprint</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s">"오류:포인터가 아무것도 가리키지 않습니다."</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+<ul>
+  <li>포인터가 아무것도 가리키고 있지 않을때는 항상 널 포인터 상태로 만들어 두는 것이 좋다.</li>
+</ul>
+
+<h4 id="함수매개변수로-포인터-사용하기">함수매개변수로 포인터 사용하기</h4>
+
+<ul>
+  <li>포인터는 함수의 매개변수로 전달될 수 있다.</li>
+  <li>
+    <p>특정한 변수를 가리키는 포인터가 함수의 매개변수로 전달되면 그 포인터를 이용하여 함수 안에서 외부 변수의 값을 변경할 수 있다.</p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//swap.c 포인터를 함수의 매개변수로 사용하는 프로그램</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span>  <span class="o">*</span><span class="n">px</span><span class="p">,</span><span class="kt">int</span> <span class="o">*</span><span class="n">py</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">tmp</span><span class="p">;</span>
+    <span class="n">tmp</span><span class="o">=*</span><span class="n">px</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">px</span><span class="o">=*</span><span class="n">py</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">py</span><span class="o">=</span><span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"swap을 호출하기 전:a=%d,b=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+    <span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"swap을 호출한 다음: a=%d,b=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+    <p>실행결과<br />
+    swap을 호출하기 전:a=1,b=2<br />
+    swap을 호출한 다음:a=2,b=1</p>
+  </li>
+</ul>
+
+<h4 id="배열과-포인터">배열과 포인터</h4>
+
+<ul>
+  <li>함수로 배열이 전달되면 함수 안에서 배열의 내용을 변경할 수 있다.</li>
+  <li>배열의 이름이 배열의 시작위치를 가리키는 포인터이기 떄문이다.</li>
+  <li>배열과 포인터의 관계:배열의 이름은 배열의 시작부분을 가리키는 포인터이다.</li>
+  <li>배열이 포인터이기떄문에 배열이 함수의 매개변수로 전달될때에 사실은 포인터가 전달되는 것이다.</li>
+  <li>이것은 메모리 공간과 함수 호출시간을 절약하는 기법이기도 하다.</li>
+  <li>함수 호출시에 배열을 복사할 필요가 없기 떄문이다.</li>
+  <li>베열의 경우에는 원본이 전달되므로 함수 안에서 배열의 내용을 변경하면 원본 배열이 변경된다.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">//array1.c배열을 함수의 매개변수로 사용하는 프로그램</span>
+  <span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>  <span class="cp">#define SIZE 6
+</span>
+  <span class="kt">void</span> <span class="nf">get_integer</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[]){</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"6개의 정수를 입력하시오:"</span><span class="p">);</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">SIZE</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+          <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">list</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kt">int</span> <span class="nf">cal_sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">list</span><span class="p">[]){</span>
+      <span class="kt">int</span> <span class="n">sum</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">SIZE</span><span class="p">;</span><span class="o">++</span><span class="n">i</span><span class="p">){</span>
+          <span class="n">sum</span><span class="o">+=*</span><span class="p">(</span><span class="n">list</span><span class="o">+</span><span class="n">i</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+      <span class="kt">int</span> <span class="n">list</span><span class="p">[</span><span class="n">SIZE</span><span class="p">];</span>
+      <span class="n">get_integer</span><span class="p">(</span><span class="n">list</span><span class="p">);</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"합:=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">cal_sum</span><span class="p">(</span><span class="n">list</span><span class="p">));</span>
+  <span class="p">}</span>
+</code></pre></div>    </div>
+    <h3 id="quizp94">quiz(p.94)</h3>
+
+    <ol>
+      <li>
+        <p>point가 2차원 공간에서의 점을 나타내는 구조체라고 했을 때 다음의 두가지 함수 정의의 차이점은 무엇인가?</p>
+
+        <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="kt">double</span> <span class="nf">get_distance</span><span class="p">(</span><span class="n">Point</span> <span class="o">*</span><span class="n">p1</span><span class="p">,</span><span class="n">Point</span> <span class="o">*</span><span class="n">p2</span><span class="p">){...}</span>   <span class="c1">//구조체 자체가 함수의 매개변수로 전달, 함수 안에서 구조체 값이 변경되어도 그 결과가 함수 호출자에게 영향을 미치지 않음</span>
+   <span class="kt">double</span> <span class="nf">get_distance</span><span class="p">(</span><span class="n">Point</span> <span class="n">p1</span><span class="p">,</span><span class="n">Point</span> <span class="n">p2</span><span class="p">){...}</span>     <span class="c1">//구조체 포인터가 함수의 매개변수로 전달, 함수 안에서 구조체 값이 변경되면 그 결과가 함수 호출자에게 영향을 미침</span>
+</code></pre></div>        </div>
+
+        <p>답:매개변수는 값을 전달하는 역할만 하기 때문에 함수의 매개변수로 값을 보내서 함수에서 그 값을 변경하여도 함수 스코프 바깥의 공간에서는 아무런 영향이 없다. 그런데 매개변수로 포인터를 전달하면 함수 안에서 메모리 주소에 접근하여 값을 저장할 수 있기 때문에 함수 바깥 공간에서도 해당 주소에는 여전히 값이 저장되어 있다는 차이점이 있다.</p>
+      </li>
+      <li>
+        <p>Point가 2차원 공간에서의 점을 나타내는 구조체라고 했을 때 다음의 두가지 함수 정의의 차이점은 무엇인가?
+ 어떤 경우에 포인터의  포인터를  함수의 매개 변수로 전달하는가?</p>
+
+        <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="kt">void</span> <span class="nf">sub1</span><span class="p">(</span><span class="n">Point</span> <span class="o">*</span><span class="n">p</span><span class="p">){...}</span>    <span class="c1">//구조체 포인터를 매개변수로 전달</span>
+   <span class="kt">void</span> <span class="nf">sub2</span><span class="p">(</span><span class="n">Point</span> <span class="o">**</span><span class="n">p</span><span class="p">){...}</span>   <span class="c1">//구조체 포인터의 포인터를 매개변수로 전달</span>
+</code></pre></div>        </div>
+      </li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="36-동적-메모리-할당">3.6 동적 메모리 할당</h3>
+
+<ul>
+  <li>일반적인 배열은 크기가 고정되어있지만, 프로그램을 작성할 당시에는 얼마나 많은 입력이 있을지를 알수 없기때문에 이것은 많은 문제를 일으킨다.</li>
+  <li>처음에 결정된 크기보다 더 큰 입력이 들어온다면 처리하지 못할 것이고 더 작은 입력이 들어온다면 남은 메모리 공간은 낭비될 것이다.</li>
+  <li>이러한 문제를 해결하기 위해 필요한 만큼의 메모리를 운영체제로부터 할당받아서 사용하고, 사용이 끝나면 시스템에 메모리를 반납하는 기능이 있다.</li>
+  <li>이것을 동적 메모리 할당(dynamic memory allocation)이라고 한다.</li>
+  <li>동적 메모리가 할당되는 공간을 히프(heap)라고 한다.</li>
+  <li>히프는 운영체제가 사용되지않는 메모리 공간을 모아 놓은 곳이다.</li>
+  <li>필요한 만큼만 할당을 받고 또 필요한 때에 사용하고 반납하기 떄문이다.</li>
+  <li>전형적인 동적 메모리 할당 코드는 다음과 같다.
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+<span class="n">p</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span> <span class="c1">//1.동적 메모리 할당</span>
+<span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="mi">1000</span><span class="p">;</span>  <span class="c1">//2.동적 메모리 사용</span>
+<span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>  <span class="c1">//3.동적 메모리 반납</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<ol>
+  <li>
+    <p>malloc()함수는 size바이트만큼의 메모리 블록을 할당한다.
+sizeof키워드는 변수나 타입의 크기를 숫자로 반환한다.
+크기의 단위는 바이트가 된다.
+sizeof(int)는 int형의 크기를 반환한다.
+malloc()은 동적 메모리 블럭의 시작 주소를 반환한다.
+반환되는 주소의 타입은 void *이므로 이를 적절한 포인터로 형변환 시켜야 한다.
+메모리 확보가 불가능하면 NULL을 함수의 반환값으로 반환한다.</p>
+  </li>
+  <li>
+    <p>동적 메모리는 포인터로만 사용할 수 있다.
+*p는 p가 가리키는 장소이다.
+*p=1000;을 실행하면 p가 가리키는 장소에 1000이 저장된다.</p>
+  </li>
+  <li>
+    <p>free()함수는 할당된 메모리 블록을 운영체제에게 반환한다.
+여기서 주의할 점은 malloc()함수가 반환했던 포인터값을 잊</p>
+  </li>
+</ol>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;malloc.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#define SIZE 10
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+
+    <span class="n">p</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">SIZE</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s">"메모리가 부족해서 할당항 수 없습니다."</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">SIZE</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="p">;</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">SIZE</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    
+    <span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="구조체와-포인터">구조체와 포인터</h4>
+
+<ul>
+  <li>우리는 구조체에 대한 포인터를 선언하고 포인터를 통하여 구조체 멤버에 접근할 수 있다.</li>
+  <li>포인터를 통하여 구조체의 멤버에 접근하는 편리한 표기법 “-&gt;”이 있다.</li>
+  <li>아래 동적 메모리 할당을 이용하여 구조체를 생성하고 여기에 데이터를 저장하는 예를 보자.</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;malloc.h&gt;</span><span class="cp">
+</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">studetnTag</span><span class="p">{</span>
+    <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+    <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+    <span class="kt">double</span> <span class="n">gpa</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">student</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">student</span> <span class="o">*</span><span class="n">s</span><span class="p">;</span>
+    <span class="n">s</span><span class="o">=</span><span class="p">(</span><span class="n">student</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">student</span><span class="p">));</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s">"메모리가 부족해서 할당항 수 없습니다."</span><span class="p">);</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">strcpy</span><span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span><span class="s">"Park"</span><span class="p">);</span>
+    <span class="n">s</span><span class="o">-&gt;</span><span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">;</span>
+
+    <span class="n">free</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>위의 코드에서 s는 구조체를 가리키는 포인터로 선언되었다.</li>
+  <li>(*s).name이라고 할수도 있지만 s-&gt;name이 더 편리하다.</li>
+</ul>
+
+<h3 id="quizp97">quiz(p.97)</h3>
+
+<ol>
+  <li>
+    <p>다음 프로그램의 오류를 모두 지적하시오.</p>
+
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+     <span class="kt">double</span> <span class="o">*</span><span class="n">pi</span><span class="p">;</span>     <span class="c1">//1</span>
+     <span class="n">pi</span><span class="o">=</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">double</span><span class="p">));</span>    <span class="c1">//2</span>
+     <span class="n">pi</span><span class="o">=</span><span class="mi">23</span><span class="p">.</span><span class="mi">92</span><span class="p">;</span>   <span class="c1">//3</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>오류:pi는 double을 가리키는 포인터이므로 메모리를 할당할떄 (double *)malloc(sizeof(double))로수정해야한다.
+ 그리고 pi는 포인터이므로 주소가 들어가야하고 *pi를 이용해야 변수의 값을 변경할 수 있다.</p>
+  </li>
+</ol>
+
+:ET
