@@ -1,4 +1,4 @@
-I"<h2 id="백준-24479번알고리즘-수업---깊이-우선-탐색-1-python">백준-24479번(알고리즘 수업 - 깊이 우선 탐색 1)-python</h2>
+I"<h3 id="백준-24479번알고리즘-수업---깊이-우선-탐색-1-python">백준-24479번(알고리즘 수업 - 깊이 우선 탐색 1)-python</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
 <span class="nb">input</span> <span class="o">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">readline</span>

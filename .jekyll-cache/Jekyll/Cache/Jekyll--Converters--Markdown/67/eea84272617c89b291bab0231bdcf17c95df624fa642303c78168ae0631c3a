@@ -1,6 +1,6 @@
-I"U<h2 id="백준-24480번알고리즘-수업---깊이-우선-탐색-2-python">백준-24480번(알고리즘 수업 - 깊이 우선 탐색 2)-python</h2>
+I"U<h3 id="백준-24480번알고리즘-수업---깊이-우선-탐색-2-python">백준-24480번(알고리즘 수업 - 깊이 우선 탐색 2)-python</h3>
 
-<h3 id="정점번호가-24479번에서-오름차순-방문이었던것이-내림차순으로-바뀌어-sort함수에서-옵션을reversetrue로-변경하였다">정점번호가 24479번에서 오름차순 방문이었던것이 내림차순으로 바뀌어 sort함수에서 옵션을(reverse=True)로 변경하였다</h3>
+<h4 id="정점번호가-24479번에서-오름차순-방문이었던것이-내림차순으로-바뀌어-sort함수에서-옵션을reversetrue로-변경하였다">정점번호가 24479번에서 오름차순 방문이었던것이 내림차순으로 바뀌어 sort함수에서 옵션을(reverse=True)로 변경하였다</h4>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
 <span class="nb">input</span> <span class="o">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">readline</span>
