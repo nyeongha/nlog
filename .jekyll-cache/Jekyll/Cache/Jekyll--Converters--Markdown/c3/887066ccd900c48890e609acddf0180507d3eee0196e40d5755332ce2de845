@@ -1,0 +1,291 @@
+I"mL<h2 id="41-스택이란">4.1 스택이란?</h2>
+
+<ul>
+  <li>스택에 A,B,C,D를 순서대로 입력했다가 하나로 삭제하면 맨 위에 놓여진 D가 삭제된다.</li>
+  <li>이러한 입출력 형태를 후입선출(LIFO:Last-In First-Out)이라고 한다.</li>
+  <li>스택에서의 입출력은 맨 위에서만 일어나고 스택의 중간에서는 데이터를 삭제할 수 없다.</li>
+  <li>스택에서 입출력이 이루어지는 부분을 스택 상단(stack top)이라고 하고 반대쪽인 바닥 부분을 스택 하단(stack bottom)이라고 한다.</li>
+  <li>스택에서 저장되는것을 요소(element)라고 부른다.</li>
+  <li>스택에 요소가 하나도 없을 때 그러한 스택을 공백 스택(empty stack)이라고 한다.</li>
+  <li>텍스트 에디터에서 “되돌리기(undo)”기능을 구현할 떄 스택을 사용할 수 있다.왜냐하면 수행된 명령어들 중에서 가장 최근에 수행된 것부터 되돌리기를 하여야 하기 때문이다.</li>
+</ul>
+
+<p><img src="/%5Bassets/images/eighth.png%5D(https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Data_stack.svg/600px-Data_stack.svg.png)" alt="" style="max-width:100%; height:auto;" /></p>
+
+<h3 id="예제시스템-스택을-이용한-함수-호출">예제:시스템 스택을 이용한 함수 호출</h3>
+
+<ul>
+  <li>시스템 스택에서 함수가 호출될 떄마다 활성 레코드(activation record)가 만들어지며 여기에 복귀주소가 저장된다.</li>
+  <li>활성 레코드에는 프로그램 카운터 뿐만 아니라 함수 호출시 매개변수와 함수 안에서 선언된 지역 변수들이 같이 생성된다.</li>
+  <li>함수 호출이 일어나면 항상 시스템 스택에 동일한 방법으로 저장되므로,함수가 자기 자신을 호출하여도 동일한 방법으로 활성 레코드가 만들어졌다가 없어지게 된다.</li>
+</ul>
+
+<h3 id="추상-자료형-스택">추상 자료형 스택</h3>
+
+<ul>
+  <li>
+    <p>추상 자료형으로서의 스택은 0개 이상의 요소를 가지는 선형 리스트의 일종으로 정의되며 스택에 요소를 추가하거나 삭제하는 연산과 현재 스택 상태를 검사하는 연산들로 구성된다.</p>
+
+    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  //ADT&lt;STACK&gt;
+  객체:0개이상의 원소를 가지는 유한 선형 리스트
+  연산:
+      create(size) ::=최대 크가가 size인 공백 스택을 생성한다.
+      is_full(s) ::=
+          if(스택의 원소수==size)
+              return True;
+          else return False;
+      is_empty(s) ::=
+          if(스택의 원소수==0)
+              return True;
+          else return False;
+      push(s,item) ::=            //삽입연산
+          if(is_full(s))
+              return ERROR_STACKFULL;
+          else 스택의 맨 위에 item을 추가한다.
+      pop(s) ::=              //삭제연산
+          if(is_empty(s))
+              return ERROR_STACKEMPTY;
+          else 스택의 맨위의 원소를 제거해서 반환한다.
+      peek(s) ::=
+          if(is_empty(s))
+              return ERROR_STACKEMPTY;
+          else 스택의 맨 위의 원소를 제거하지 않고 반한한다.
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="quizp106">quiz(p.106)</h3>
+
+<ol>
+  <li>스택과 같은 입출력 형태를 후입선출(LIFO)라고한다.</li>
+  <li>
+    <p>스택을 사용하여서 a,b,c,d,e를 입력하여서 b,c,e,d,a와 같은 출력을 얻으려면 입력과 출력의 순서를 어떻게 하여야 하는가?</p>
+
+    <p>입력:a,d,e,c,b
+ 출력:b,c,e,d,a</p>
+  </li>
+</ol>
+
+<h2 id="42-스택의-구현">4.2 스택의 구현</h2>
+
+<ul>
+  <li>스택의 저장되는 요소의 타입은 항상 element라고 가정한다.</li>
+  <li>만약 정수 스택이 필요하면 element타입을 정수로 정의하면 된다.</li>
+  <li>일반적인 경우에는 element타입이 구조체가 될것이다.</li>
+  <li>
+    <p>구조체안에는 무엇이든지 넣을 수 있기 때문이다.</p>
+  </li>
+  <li>스택의 is_empty연산</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">is_empty</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">:</span>
+    <span class="k">if</span> <span class="n">top</span><span class="o">==-</span><span class="mi">1</span>
+        <span class="n">then</span> <span class="k">return</span> <span class="n">True</span>
+        <span class="k">else</span> <span class="k">return</span> <span class="n">False</span>
+</code></pre></div></div>
+<ul>
+  <li>스택의 is_full연산</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">is_full</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">:</span>
+    <span class="k">if</span> <span class="n">top</span><span class="o">&lt;=</span><span class="p">(</span><span class="n">MAX_STACK_SIZE</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">then</span> <span class="k">return</span> <span class="n">True</span>
+        <span class="k">else</span> <span class="k">return</span> <span class="n">False</span>
+</code></pre></div></div>
+
+<ul>
+  <li>스택의 push연산</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">push</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">:</span>
+    <span class="k">if</span> <span class="n">is_full</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+        <span class="n">then</span> <span class="n">error</span> <span class="s">"overflow"</span>
+        <span class="k">else</span> <span class="n">top</span><span class="o">&lt;-</span><span class="n">top</span><span class="o">+</span><span class="mi">1</span>
+            <span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="p">]</span><span class="o">&lt;-</span><span class="n">x</span>
+</code></pre></div></div>
+
+<ul>
+  <li>스택의 pop연산</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pop</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">:</span>
+    <span class="k">if</span> <span class="n">is_empty</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+        <span class="n">then</span> <span class="n">error</span> <span class="s">"underflow"</span>
+        <span class="k">else</span> <span class="n">e</span><span class="o">&lt;-</span><span class="n">stack</span><span class="p">[</span><span class="n">top</span><span class="p">]</span>
+            <span class="n">top</span><span class="o">&lt;-</span><span class="n">top</span><span class="o">-</span><span class="mi">1</span>
+            <span class="k">return</span> <span class="n">e</span>
+</code></pre></div></div>
+
+<h3 id="전역변수로-구현하는-방법">전역변수로 구현하는 방법</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define MAX_STACK_SIZE 100
+</span><span class="k">typedef</span> <span class="kt">int</span> <span class="n">element</span><span class="p">;</span>
+<span class="n">element</span> <span class="n">stack</span><span class="p">[</span><span class="n">MAX_STACK_SIZE</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">top</span><span class="o">=-</span><span class="mi">1</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">push</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">push</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">pop</span><span class="p">());</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">pop</span><span class="p">());</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="스택의-요소를-구조체로-하기">스택의 요소를 구조체로 하기</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define MAX_STACK_SIZE 100
+#define MAX_STRING 100
+</span>
+<span class="k">typedef</span> <span class="k">struct</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">student_no</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="n">MAX_STRING</span><span class="p">];</span>
+    <span class="kt">char</span> <span class="n">address</span><span class="p">[</span><span class="n">MAX_STRING</span><span class="p">];</span>
+<span class="p">}</span> <span class="n">element</span><span class="p">;</span>
+
+<span class="n">element</span> <span class="n">stack</span><span class="p">[</span><span class="n">MAX_STACK_SIZE</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">top</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">element</span> <span class="n">ie</span><span class="o">=</span><span class="p">{</span>
+        <span class="mi">2019001</span><span class="p">,</span>
+        <span class="s">"HONG"</span><span class="p">,</span>
+        <span class="s">"Seoul"</span>
+    <span class="p">};</span>
+
+    <span class="n">element</span> <span class="n">oe</span><span class="p">;</span>
+
+    <span class="n">push</span><span class="p">(</span><span class="n">ie</span><span class="p">);</span>
+    <span class="n">oe</span><span class="o">=</span><span class="n">pop</span><span class="p">();</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">"학번:%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">oe</span><span class="p">.</span><span class="n">student_no</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"이름:%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">oe</span><span class="p">.</span><span class="n">name</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"주소:%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">oe</span><span class="p">.</span><span class="n">address</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="관련된-데이터를-함수의-매개변수로-전달하는-방법">관련된 데이터를 함수의 매개변수로 전달하는 방법</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define MAX_STACK_SIZE 100
+</span><span class="k">typedef</span> <span class="kt">int</span> <span class="n">element</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="k">struct</span><span class="p">{</span>
+    <span class="n">element</span> <span class="n">data</span><span class="p">[</span><span class="n">MAX_STACK_SIZE</span><span class="p">]</span>
+    <span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">StackType</span><span class="p">;</span>
+
+<span class="n">element</span> <span class="n">stack</span><span class="p">[</span><span class="n">MAX_STACK_SIZE</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">top</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">StackType</span> <span class="n">s</span><span class="p">;</span>        <span class="c1">//스택이  정적으로 생성된다.</span>
+
+    <span class="n">init_stack</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="p">);</span>     <span class="c1">//함수를 호출할 때 스택의 주소를 전달한다.</span>
+    <span class="n">push</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">push</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">pop</span><span class="p">(</span><span class="o">%</span><span class="n">s</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">pop</span><span class="p">(</span><span class="o">%</span><span class="n">s</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="스택을-동적-메모리-할당으로-생성하는-방법">스택을 동적 메모리 할당으로 생성하는 방법</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#define MAX_STACK_SIZE 100
+</span><span class="k">typedef</span> <span class="kt">int</span> <span class="n">element</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="k">struct</span><span class="p">{</span>
+    <span class="n">element</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">capcity</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">top</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">StackType</span><span class="p">;</span>
+
+<span class="n">element</span> <span class="n">stack</span><span class="p">[</span><span class="n">MAX_STACK_SIZE</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">top</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">StackType</span> <span class="o">*</span><span class="n">s</span><span class="p">;</span>
+    <span class="n">s</span><span class="o">=</span><span class="p">(</span><span class="n">StackType</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">StackType</span><span class="p">));</span>        <span class="c1">//스택이  동적으로 생성된다.</span>
+
+    <span class="n">init_stack</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>     <span class="c1">//함수를 호출할 때 스택을 전달한다.</span>
+    <span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">push</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">pop</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span><span class="n">pop</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
+	<span class="n">free</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="quizp116">quiz(p.116)</h3>
+
+<ol>
+  <li>스택에서 top의 초기값은 무엇인가?	답:-1</li>
+  <li>스택에서 top이 가리키는 것은 무엇인가?	답:데이터의 입출력이 이루어지는 부분</li>
+  <li>top이 8이면 현재 스택에 저장된 데이터의 층수는 몇 개인가?	답:9층</li>
+</ol>
+
+<h2 id="45-스택의-응용후위-표기-수식의--게산">4.5 스택의 응용:후위 표기 수식의  게산</h2>
+
+<ul>
+  <li>수식을 표기하는 방법에는 중위(infix),후위(postfix),전위(prefix)의 3가지 방법이 있다.</li>
+  <li>연산자가 피연산자 사이에 있으면 주우이이고 연산자가 피연산자 뒤에 있으면 후위이다.</li>
+  <li>연산자가 피연산자 앞에있으면 전위라고 한다.</li>
+  <li>인간은 주로 중위표기법을 사용하지만 컴파일러는 주로 후위 표기법을 사용한다.</li>
+  <li>프로그래머가 수식을 중위표기법으로 작성하면 컴파일러는 이것을 후위표기법으로 변환한 후에 스택을 이용하여 계산한다.</li>
+  <li>중위표기방법에서는 먼저 계산하여야 할 부분을 나타내기 위하여 괄호를 사용하여야 하는데 비하여 후위 표기 방식에서는 괄호가 필요없어 컴파일러에서 후위 표기방법을 선호한다.</li>
+  <li>후위 표기 수식 계산 알고리즘을 정리해보면 다음과 같다.</li>
+</ul>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>calc_posfix:
+	스택 s를 생성하고 초기화 한다.
+	for item in 후위표기식 do
+		if (item이 피연산자이면)
+			push(s,item)
+		else if (item이 연산자 op이면)
+			second&lt;-pop(s)
+			first&lt;-pop(s)
+			result&lt;-first op second		//op는 +-*/중의 하나
+			push(s,result)
+		final_result&lt;-pop(s)
+</code></pre></div></div>
+
+<h3 id="중위-표기-수식을-후위-표기-수식으로-변환">중위 표기 수식을 후위 표기 수식으로 변환</h3>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>infix_to_postfix(exp):
+
+스택 s를 생성하고 초기화
+while (exp에 처리할 문자가 남아있으면)
+	ch&lt;-다음에 처리할 문자
+	switch(ch)
+	case 연산자:
+		while(peek(s)의 우선순위&gt;=ch의 우선순위) do
+			e&lt;-pop(s)
+			e를 출력
+		push(s,ch);
+		break;
+	case 왼쪽 괄호:
+		push(s,ch);
+		break;
+	case 오른쪽 괄호:
+		e&lt;-pop(s);
+		while(e!=왼쪽 괄호) do
+			e를 출력
+			e&lt;-pop(s)
+		break;
+	case 피연산자:
+		ch를 출력
+		break;
+while (not is_empty(s)) do
+	e&lt;-pop(s)
+	e를 출력
+</code></pre></div></div>
+
+<h3 id="quizp135">quiz(p.135)</h3>
+
+<ol>
+  <li>
+    <p>스택을 사용하여서 다음과 같은 중위 수식을 후위 수식으로 변경하고 수식의 값을 계산하는 과정을 그림으로 보여라.</p>
+
+    <p>중위:5*(10+2)%2 <br />
+ 후위:5 10 2 + * 2 %</p>
+  </li>
+</ol>
+
+:ET
