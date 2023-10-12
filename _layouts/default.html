@@ -21,10 +21,7 @@ Jekyll integration by Chris Bobbe | chrisbobbe.github.io
 	{%- include head.html -%}
 	
 	<body>
-		<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TDHC5Z6D"
-	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-	<!-- End Google Tag Manager (noscript) -->
+		{%- include googleTag.html -%}
 		{{- content -}}
 		{%- include footer.html -%}
 	</body>
