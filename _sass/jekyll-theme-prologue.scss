@@ -717,8 +717,11 @@
 			
 		}
 		> script{
-			width: 100%;
-			max-width: 100%;
+			&.utterances{
+				width: 100%;
+				max-width: 100%;
+			}
+			
 		}
 	}
 
