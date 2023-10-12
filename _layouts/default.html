@@ -5,13 +5,13 @@ html5up.net | @ajlkn
 Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 Jekyll integration by Chris Bobbe | chrisbobbe.github.io
 -->
-<head>
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8120018532827714"
-     crossorigin="anonymous"></script>
+<head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8120018532827714"
+	crossorigin="anonymous"></script>
+	{% include analytics.html %}
 </head>
 <html>
 	{%- include head.html -%}
-	{% include analytics.html %}
+	
 	<body>
 		{{- content -}}
 		{%- include footer.html -%}
