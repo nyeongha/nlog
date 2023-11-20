@@ -1,8 +1,3 @@
----
-layout: default
----
-
-
 {%- include header.html scrolly_nav=_posts -%}
 
 <ul class="posts-list">
